@@ -365,7 +365,7 @@ const Home: NextPage = () => {
 
         
        
-        {mounted && isConnected && tokenIds && (tokenIds.map((Id) => (
+        {mounted && isConnected && tokenIds && erc20Array &&(tokenIds.map((Id) => (
           <p key = {Id.key} className={styles.description}>
             Membership Id: {Id.value}<br></br>value : {erc20Array[Id.key].value} Gold
              <br></br> 
