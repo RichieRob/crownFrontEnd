@@ -19,7 +19,6 @@ import {abi as crownabi} from '../abi/crown';
 import {abi as erc20abi} from '../abi/erc20';
 import {abi as poapabi} from '../abi/erc20';
 import {abi as hookabi} from '../abi/hook';
-import Images from './images'
 import { ValueOf } from 'next/dist/shared/lib/constants';
 const baseUrl = 'https://picsum.photos/id/'
 const MY_TOKEN_LIST = [
@@ -84,7 +83,7 @@ const Home: NextPage = () => {
   const banana = 'banana';
 
   const { isConnected, address, isConnecting, isDisconnected }= useAccount();
-  setAddress1(address||'0x0000000000000000000000000000000000000000');
+ 
 
   const { config: crownContractWriteConfig } = usePrepareContractWrite({
     ...crownContractConfig,
@@ -224,6 +223,11 @@ const Home: NextPage = () => {
     hash: burnData?.hash,
   });
 
+  React.useEffect(() => {
+    if (address) {
+      setAddress1(address||'0x0000000000000000000000000000000000000000');
+    }
+  },[address]);
   
   
   React.useEffect(() => {
