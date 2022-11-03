@@ -77,12 +77,14 @@ const Home: NextPage = () => {
   const [owner, setOwner] = React.useState('');
   const [erc20Balance, setErc20Balance] = React.useState('');
   const [poapBalance, setPoapBalance] = React.useState<number>(0);
-  const [tokenIds , setTokenIds] = React.useState();
+  const [tokenIds , setTokenIds] = React.useState<{ key: number; value: string }[]>();
   const [tokenId,setTokenId]=React.useState('5');
-  const [erc20Array,setErc20Array]=React.useState();
- 
+  const [erc20Array,setErc20Array]=React.useState<{ key: number; value: string }[]>();
+  const [address1, setAddress1]=React.useState<`0x${string}`>('0x0000000000000000000000000000000000000000');
+  const banana = 'banana';
 
   const { isConnected, address, isConnecting, isDisconnected }= useAccount();
+  setAddress1(address||'0x0000000000000000000000000000000000000000');
 
   const { config: crownContractWriteConfig } = usePrepareContractWrite({
     ...crownContractConfig,
@@ -135,7 +137,7 @@ const Home: NextPage = () => {
   const { data: erc20BalanceData } = useContractRead({
     ...erc20ContractConfig,
     functionName: 'balanceOf',
-    args: [address],
+    args: [address1],
     watch: true,
   });
 
@@ -149,7 +151,7 @@ const Home: NextPage = () => {
   const { data: poapData } = useContractRead({
     ...poapContractConfig,
     functionName: 'balanceOf',
-    args: [address],
+    args: [address1],
     watch: true,
   });
 
@@ -175,7 +177,7 @@ const Home: NextPage = () => {
       stateMutability: "view",
       type: "function",
     },],
-    args: [address],
+    args: [address1],
     watch: true,
   });
 
@@ -201,7 +203,7 @@ const Home: NextPage = () => {
       stateMutability: "view",
       type: "function",
     },],
-    args: [address],
+    args: [address1],
     watch: true,
   });
 
