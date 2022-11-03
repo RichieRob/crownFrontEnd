@@ -20,6 +20,7 @@ import {abi as erc20abi} from '../abi/erc20';
 import {abi as poapabi} from '../abi/erc20';
 import {abi as hookabi} from '../abi/hook';
 import Images from './images'
+import { ValueOf } from 'next/dist/shared/lib/constants';
 const baseUrl = 'https://picsum.photos/id/'
 const MY_TOKEN_LIST = [
   {
@@ -79,10 +80,7 @@ const Home: NextPage = () => {
   const [tokenIds , setTokenIds] = React.useState();
   const [tokenId,setTokenId]=React.useState('5');
   const [erc20Array,setErc20Array]=React.useState();
-  async function onClick(something){
-    await setTokenId(something);
-  
-  } 
+ 
 
   const { isConnected, address, isConnecting, isDisconnected }= useAccount();
 
@@ -277,7 +275,7 @@ const Home: NextPage = () => {
 
 
 
-  async function doTheClicky (something) {
+  async function doTheClicky (something: string) {
     setTokenId(something)
     burn?.({
       recklesslySetUnpreparedArgs: [ethers.BigNumber.from(something)],
